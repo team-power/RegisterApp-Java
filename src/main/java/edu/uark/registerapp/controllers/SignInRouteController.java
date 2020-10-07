@@ -21,6 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class SignInRouteController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView start() {
-    return (new ModelAndView("employeeSignIn"));
+    return (new ModelAndView("productListing"));
     }
 }
