@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="/styles/master.css">
 
 	<script type="text/javascript" src="/scripts/master.js" defer></script>
-	<script type="text/javascript" src="/scripts/signIn.js" defer></script>
+	<!--<script type="text/javascript" src="/scripts/signIn.js" defer></script> -->
 </head>
 
 <body>
@@ -21,7 +21,7 @@
 			<h4 id="errorMessage" class="error-message" th:text="${errorMessage}"></h4>
 		</div>
 
-		<form action="/" method="POST" onsubmit="return validateForm();" class="inputContent">
+		<form action="/" method="POST" name="SignIn" onsubmit="return validateForm();" class="inputContent">
 				<input type="number" name="employeeID" value="" placeholder="EMPLOYEE ID"/><br>
 				<div id="employeeID_error" style=""> Please Enter VALID Employee ID</div><br>
 				<input type="password" name="password" value="" placeholder="PASSWORD" /><br>
