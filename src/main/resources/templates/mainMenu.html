@@ -21,7 +21,21 @@
 			<h4 id="errorMessage" class="error-message" th:text="${errorMessage}"></h4>
 		</div>
 
-		<!-- TODO: Add the various action button elements -->
+		<div class="mainMenuWrapper">
+            <div id="mainMenu" class="menuButtons">
+                <li>
+                    <button id="startTransactionButton" type="button" class="action">Start Transaction</button>
+                    <button id="productListingButton" type="button" class="action">View Products</button>
+                    <button id="employeeDetailsButton" type="button" class="action">Create Employee</button>
+                    <button id="salesReportButton" type="button" class="action">Sales Report</button>
+                    <button id="cashierReportButton" type="button" class="action">Cashier Report</button>
+                </li>
+            </div>
+
+            <div id="signOutImage" class="signOut">
+                <img src="/images/baseline_input_black_18dp.png" alt="Sign Out"></a>
+            </div>
+        </div>
 	</div>
 
 	<div class="hidden">
