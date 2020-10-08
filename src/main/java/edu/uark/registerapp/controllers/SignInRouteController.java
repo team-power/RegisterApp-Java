@@ -11,20 +11,12 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.uark.registerapp.controllers.enums.ViewNames;
 
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "/S")
 public class SignInRouteController extends BaseRouteController {
 	// TODO: Route for initial page load
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView start() {
-		String qry = "SELECT count(*) From employee ";
-		if (qry == "0"){
 			return (new ModelAndView("signIn"));
-		}
-		else{
-			return (new ModelAndView("mainMenu"));
-		}
-
-
 
 	}
 
