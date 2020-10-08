@@ -14,6 +14,10 @@ import edu.uark.registerapp.controllers.enums.ViewNames;
 @RequestMapping(value = "/")
 public class SignInRouteController extends BaseRouteController {
 	// TODO: Route for initial page load
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView start() {
+		return (new ModelAndView("productListing"));
+	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public ModelAndView performSignIn(
@@ -30,3 +34,12 @@ public class SignInRouteController extends BaseRouteController {
 				ViewNames.MAIN_MENU.getRoute()));
 	}
 }
+
+/*@Controller
+@RequestMapping(value = "/")
+public class SignInRouteController {
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView start() {
+		return (new ModelAndView("productListing"));
+	}
+}*/

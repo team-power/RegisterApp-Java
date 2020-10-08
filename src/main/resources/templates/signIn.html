@@ -22,8 +22,46 @@
 		</div>
 
 		<form action="/" method="POST" onsubmit="return validateForm();" class="inputContent">
-			<!-- TODO: Form input elements -->
-		</form>
+				<input type="number" name="employeeID" value="" placeholder="EMPLOYEE ID"/><br>
+				<div id="employeeID_error" style=""> Please Enter VALID Employee ID</div><br>
+				<input type="password" name="password" value="" placeholder="PASSWORD" /><br>
+				<div id="password_error"> Please Enter password</div><br>
+				<input type="submit" value="SignIn" />
+			</form>
+			<script>
+				//Validation code for form
+
+				const employee_ID = document.forms['SignIn']['employeeID'];
+				const password = document.forms['SignIn']['password'];
+
+				let employeeID_error = document.getElementById('employeeID_error');
+				let password_error = document.getElementById('password_error');
+
+				employeeID_error.style.display = "none";
+				password_error.style.display = "none";
+
+				function validateForm(){
+
+					if((employee_ID.value == "" || !Number(employee_ID.value))
+							&& password.value !=""){
+						password_error.style.display = "none";
+						employeeID_error.style.display = "block";
+						return false;
+					}
+					if(Number(employee_ID.value) && password.value == "" ){
+						employeeID_error.style.display = "none";
+						password_error.style.display = "block";
+						return false;
+					}
+					if((employee_ID.value == "" || !Number(employee_ID.value))
+							&& password.value ==""){
+						employeeID_error.style.display = "block";
+						password_error.style.display = "block";
+						return false;
+					}
+					return true;
+				}
+			</script>
 	</div>
 		
 </body>
