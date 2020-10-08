@@ -16,7 +16,16 @@ public class SignInRouteController extends BaseRouteController {
 	// TODO: Route for initial page load
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView start() {
-		return (new ModelAndView("signIn"));
+		String qry = "SELECT count(*) From employee ";
+		if (qry == "0"){
+			return (new ModelAndView("signIn"));
+		}
+		else{
+			return (new ModelAndView("mainMenu"));
+		}
+
+
+
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
