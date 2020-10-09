@@ -15,6 +15,8 @@ import edu.uark.registerapp.controllers.enums.ViewModelNames;
 import edu.uark.registerapp.controllers.enums.ViewNames;
 import edu.uark.registerapp.models.entities.ActiveUserEntity;
 
+import edu.uark.registerapp.models.enums.EmployeeClassification;
+
 @Controller
 @RequestMapping(value = "/mainMenu")
 public class MainMenuRouteController extends BaseRouteController {
@@ -23,7 +25,6 @@ public class MainMenuRouteController extends BaseRouteController {
 		@RequestParam final Map<String, String> queryParameters,
 		final HttpServletRequest request
 	) {
-
 		final Optional<ActiveUserEntity> activeUserEntity =
 			this.getCurrentUser(request);
 		if (!activeUserEntity.isPresent()) {
@@ -36,9 +37,13 @@ public class MainMenuRouteController extends BaseRouteController {
 				queryParameters);
 
 		// TODO: Examine the ActiveUser classification if you want this information
+		if (this.isElevatedUser(activeUserEntity.getClassification())) {
+
+		}
+
 		modelAndView.addObject(
 			ViewModelNames.IS_ELEVATED_USER.getValue(),
-			true);
+			false);
 		
 		return modelAndView;
 	}
