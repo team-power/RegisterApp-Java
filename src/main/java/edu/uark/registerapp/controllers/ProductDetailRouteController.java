@@ -48,6 +48,7 @@ public class ProductDetailRouteController {
 
 		return modelAndView;
 	}
+	
 
 	// Properties
 	@Autowired
