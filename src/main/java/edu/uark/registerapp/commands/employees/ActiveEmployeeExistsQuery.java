@@ -102,6 +102,6 @@ public class ProductByLookupCodeQuery implements ResultCommandInterface<Product>
 
     @Autowired
     private ProductRepository productRepository;
-}
+}*/
 
 
