@@ -23,18 +23,21 @@ import edu.uark.registerapp.models.entities.ActiveUserEntity;
 @RequestMapping(value = "/productDetail")
 public class ProductDetailRouteController extends BaseRouteController {
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView start() {
+	public ModelAndView start(final HttpServletRequest request) {
+		final Optional<ActiveUserEntity> activeUserEntity =
+			this.getCurrentUser(request);
+
 		return (new ModelAndView(ViewNames.PRODUCT_DETAIL.getViewName()))
 			.addObject(
 				ViewModelNames.PRODUCT.getValue(),
-				(new Product()).setLookupCode(StringUtils.EMPTY).setCount(0));
+				(new Product()).setLookupCode(StringUtils.EMPTY).setCount(0))
+			.addObject(
+				ViewModelNames.IS_ELEVATED_USER.getValue(),
+				this.isElevatedUser(activeUserEntity.get()));
 	}
 
 	@RequestMapping(value = "/{productId}", method = RequestMethod.GET)
-	public ModelAndView startWithProduct(
-		@PathVariable final UUID productId,
-		final HttpServletRequest request
-	) {
+	public ModelAndView startWithProduct(@PathVariable final UUID productId) {
 		final Optional<ActiveUserEntity> activeUserEntity =
 			this.getCurrentUser(request);
 

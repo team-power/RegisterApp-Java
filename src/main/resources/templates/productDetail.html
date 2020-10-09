@@ -38,7 +38,7 @@
 					<tr>
 						<td class="label">Lookup Code:</td>
 						<td>
-							<input id="productLookupCode" type="text" th:value="${!product.isEmpty} ? ${product.lookupCode} : ''" class="update" th:attrappend="${!isElevatedUser} ? disabled : ''"/>
+							<input id="productLookupCode" type="text" th:value="${!product.isEmpty} ? ${product.lookupCode} : ''" class="update" th:attrappend="${isElevatedUser} ? '' : disabled"/>
 						</td>
 					</tr>
 					<tr>
