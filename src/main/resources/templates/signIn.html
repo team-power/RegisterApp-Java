@@ -26,11 +26,14 @@
 				<div id="employeeID_error" style=""> Please Enter VALID Employee ID</div><br>
 				<input type="password" name="password" value="" placeholder="PASSWORD" /><br>
 				<div id="password_error"> Please Enter password</div><br>
-				<input type="submit" value="SignIn" />
+				<input id="signIn" type="submit" value="SignIn" />
 			</form>
 			<script>
 				//Validation code for form
 
+				document.addEventListener("DOMContentLoaded", () => {
+					document.getElementById("signIn").addEventListener("click", signInClick);
+				});
 				const employee_ID = document.forms['SignIn']['employeeID'];
 				const password = document.forms['SignIn']['password'];
 
@@ -62,13 +65,11 @@
 					return true;
 				}
 
-				function productClick(event) {
-					let listItem = findClickedListItemElement(event.target);
-
-					window.location.assign(
-							"/productListing"
-							);
+				function signInClick(event) {
+					window.location.assign("/mainMenu/");
 				}
+
+
 
 			</script>
 	</div>
