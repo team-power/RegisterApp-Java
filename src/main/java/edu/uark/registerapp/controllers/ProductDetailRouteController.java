@@ -46,6 +46,10 @@ public class ProductDetailRouteController {
 					.setLookupCode(StringUtils.EMPTY));
 		}
 
+		modelAndView.addObject(
+			ViewModelNames.IS_ELEVATED_USER.getValue(),
+			this.isElevatedUser(activeUserEntity.get()));
+
 		return modelAndView;
 	}
 	

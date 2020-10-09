@@ -35,6 +35,11 @@ function productCountKeypress(event) {
 
 // Save
 function saveActionClick(event) {
+	if (!isElevatedUser) {
+		window.location.assign("/productListing/");
+		return;
+	}
+
 	if (!validateSave()) {
 		return;
 	}
@@ -122,6 +127,11 @@ function hideProductSavedAlertModal() {
 
 // Delete
 function deleteActionClick(event) {
+	if (!isElevatedUser) {
+		window.location.assign("/productListing/");
+		return;
+	}
+
 	const deleteActionElement = event.target;
 	const deleteActionUrl = ("/api/product/" + getProductId());
 

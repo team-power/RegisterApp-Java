@@ -8,6 +8,9 @@
 	<link rel="stylesheet" type="text/css" href="/styles/productDetail.css">
 
 	<script type="text/javascript" src="/scripts/master.js" defer></script>
+	<script>
+		var isElevatedUser = '${isElevatedUser}';
+	</script>
 	<script type="text/javascript" src="/scripts/productDetail.js" defer></script>
 </head>
 
@@ -35,20 +38,20 @@
 					<tr>
 						<td class="label">Lookup Code:</td>
 						<td>
-							<input id="productLookupCode" type="text" th:value="${!product.isEmpty} ? ${product.lookupCode} : ''" class="update" />
+							<input id="productLookupCode" type="text" th:value="${!product.isEmpty} ? ${product.lookupCode} : ''" class="update" th:attrappend="${!isElevatedUser} ? disabled : ''"/>
 						</td>
 					</tr>
 					<tr>
 						<td class="label">Count:</td>
 						<td>
-							<input id="productCount" type="number" th:value="${!product.isEmpty} ? ${product.count} : ''" class="update" />
+							<input id="productCount" type="number" th:value="${!product.isEmpty} ? ${product.count} : ''" class="update" th:attrappend="${isElevatedUser} ? '' : disabled"/>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 
-		<div class="productActionsWrapper">
+		<div class="productActionsWrapper" th:classappend="${isElevatedUser} ? '' : hidden">
 			<br />
 			<div id="deleteActionContainer" th:class="${product.isEmpty} ? hidden : ''">
 				<button id="deleteButton" type="button" class="action">Delete</button>
