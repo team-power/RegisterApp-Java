@@ -37,7 +37,7 @@ public class ProductDetailRouteController extends BaseRouteController {
 	}
 
 	@RequestMapping(value = "/{productId}", method = RequestMethod.GET)
-	public ModelAndView startWithProduct(@PathVariable final UUID productId) {
+	public ModelAndView startWithProduct(@PathVariable final UUID productId, final HttpServletRequest request) {
 		final Optional<ActiveUserEntity> activeUserEntity =
 			this.getCurrentUser(request);
 
@@ -62,7 +62,7 @@ public class ProductDetailRouteController extends BaseRouteController {
 		modelAndView.addObject(
 			ViewModelNames.IS_ELEVATED_USER.getValue(),
 			this.isElevatedUser(activeUserEntity.get()));
-
+			
 		return modelAndView;
 	}
 	
