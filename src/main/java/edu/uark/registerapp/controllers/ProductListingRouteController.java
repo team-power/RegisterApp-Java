@@ -15,7 +15,10 @@ import edu.uark.registerapp.models.api.Product;
 @RequestMapping(value = "/productListing")
 public class ProductListingRouteController {
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView showProductListing() {
+	public ModelAndView showProductListing(final HttpServletRequest request) {
+		final Optional<ActiveUserEntity> activeUserEntity =
+			this.getCurrentUser(request);
+			
 		ModelAndView modelAndView =
 			new ModelAndView(ViewNames.PRODUCT_LISTING.getViewName());
 

@@ -27,7 +27,13 @@ public class ProductDetailRouteController {
 	}
 
 	@RequestMapping(value = "/{productId}", method = RequestMethod.GET)
-	public ModelAndView startWithProduct(@PathVariable final UUID productId) {
+	public ModelAndView startWithProduct(
+		@PathVariable final UUID productId,
+		final HttpServletRequest request
+	) {
+		final Optional<ActiveUserEntity> activeUserEntity =
+			this.getCurrentUser(request);
+			
 		final ModelAndView modelAndView =
 			new ModelAndView(ViewNames.PRODUCT_DETAIL.getViewName());
 
