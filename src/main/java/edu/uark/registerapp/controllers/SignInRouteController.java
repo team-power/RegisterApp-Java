@@ -34,14 +34,14 @@ public class SignInRouteController extends BaseRouteController {
 			@RequestParam final Map<String, String> queryParameters,
 			final HttpServletRequest request
 	) {
-		ModelAndView modelAndView = new ModelAndView(ViewNames.SIGN_IN.getViewName());;
+		ModelAndView modelAndView = new ModelAndView(ViewNames.SIGN_IN.getViewName());
 
 			final boolean activeUserExists = this.activeUserExists();
 
 			if (!activeUserExists) {
 					modelAndView = new ModelAndView(
 							REDIRECT_PREPEND.concat(
-									ViewNames.MAIN_MENU.getRoute()));
+									ViewNames.EMPLOYEE_DETAIL.getRoute()));
 				}
 
 			return modelAndView;
@@ -57,7 +57,13 @@ public class SignInRouteController extends BaseRouteController {
 		String employeeId = employeeSignIn.getEmployeeId();
 		String password = employeeSignIn.getPassword();
 		//if()
+		final boolean validCredentials = this.validCredentials();
 
+		if (validCredentials) {
+			return new ModelAndView(
+					REDIRECT_PREPEND.concat(
+							ViewNames.SIGN_IN.getRoute()));
+		}
 
 		// TODO: Use the credentials provided in the request body
 		//  and the "id" property of the (HttpServletRequest)request.getSession() variable
@@ -70,6 +76,16 @@ public class SignInRouteController extends BaseRouteController {
 				ViewNames.MAIN_MENU.getRoute()));
 	}
 
+
+	private boolean validCredentials(){
+		try{
+			this.employeeQuery.execute();
+			return true;
+		} catch (final NotFoundException e) {
+			return false;
+		}
+	}
+
 	private boolean activeUserExists() {
 		try {
 			this.activeEmployeeExistsQuery.execute();
@@ -78,7 +94,12 @@ public class SignInRouteController extends BaseRouteController {
 			return false;
 		}
 	}
+
+
 	// Properties
+
+	@Autowired
+	private EmployeeQuery employeeQuery;
 
 	@Autowired
 	private ActiveEmployeeExistsQuery activeEmployeeExistsQuery;
