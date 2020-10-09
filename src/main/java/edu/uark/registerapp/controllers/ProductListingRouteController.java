@@ -15,7 +15,7 @@ import edu.uark.registerapp.models.api.Product;
 
 @Controller
 @RequestMapping(value = "/productListing")
-public class ProductListingRouteController {
+public class ProductListingRouteController extends BaseRouteController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView showProductListing(final HttpServletRequest request) {
 		final Optional<ActiveUserEntity> activeUserEntity =
