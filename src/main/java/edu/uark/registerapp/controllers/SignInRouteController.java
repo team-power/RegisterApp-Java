@@ -54,6 +54,9 @@ public class SignInRouteController extends BaseRouteController {
 
 		HttpServletRequest request
 	) {
+		String employeeId = employeeSignIn.getEmployeeId();
+		String password = employeeSignIn.getPassword();
+		//if()
 
 
 		// TODO: Use the credentials provided in the request body
