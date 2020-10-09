@@ -60,9 +60,7 @@ public class SignInRouteController extends BaseRouteController {
 		final boolean validCredentials = this.validCredentials();
 
 		if (validCredentials) {
-			return new ModelAndView(
-					REDIRECT_PREPEND.concat(
-							ViewNames.SIGN_IN.getRoute()));
+			return new ModelAndView(ViewNames.SIGN_IN.getViewName());
 		}
 
 		// TODO: Use the credentials provided in the request body
