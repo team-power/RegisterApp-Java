@@ -2,6 +2,8 @@ package edu.uark.registerapp.controllers;
 
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,7 @@ public class ProductDetailRouteController {
 	) {
 		final Optional<ActiveUserEntity> activeUserEntity =
 			this.getCurrentUser(request);
-			
+
 		final ModelAndView modelAndView =
 			new ModelAndView(ViewNames.PRODUCT_DETAIL.getViewName());
 

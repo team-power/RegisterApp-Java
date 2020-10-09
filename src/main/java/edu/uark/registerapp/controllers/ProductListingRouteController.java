@@ -1,5 +1,7 @@
 package edu.uark.registerapp.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +20,7 @@ public class ProductListingRouteController {
 	public ModelAndView showProductListing(final HttpServletRequest request) {
 		final Optional<ActiveUserEntity> activeUserEntity =
 			this.getCurrentUser(request);
-			
+
 		ModelAndView modelAndView =
 			new ModelAndView(ViewNames.PRODUCT_LISTING.getViewName());
 
