@@ -16,13 +16,14 @@ public class SignInRouteController extends BaseRouteController {
 	// TODO: Route for initial page load
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView start() {
-			return (new ModelAndView("signIn"));
+			return (new ModelAndView("mainMenu"));
 
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public ModelAndView performSignIn(
 		// TODO: Define an object that will represent the sign in request and add it as a parameter here
+
 		HttpServletRequest request
 	) {
 
