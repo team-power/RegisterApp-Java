@@ -1,6 +1,7 @@
 package edu.uark.registerapp.controllers;
 
 import java.util.UUID;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +17,7 @@ import edu.uark.registerapp.commands.products.ProductQuery;
 import edu.uark.registerapp.controllers.enums.ViewModelNames;
 import edu.uark.registerapp.controllers.enums.ViewNames;
 import edu.uark.registerapp.models.api.Product;
+import edu.uark.registerapp.models.entities.ActiveUserEntity;
 
 @Controller
 @RequestMapping(value = "/productDetail")
