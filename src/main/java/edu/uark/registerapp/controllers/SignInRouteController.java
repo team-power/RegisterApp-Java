@@ -32,23 +32,16 @@ public class SignInRouteController extends BaseRouteController {
 			@RequestParam final Map<String, String> queryParameters,
 			final HttpServletRequest request
 	) {
-		ModelAndView modelAndView = null;
+		ModelAndView modelAndView = new ModelAndView(ViewNames.SIGN_IN.getViewName());;
 
 			final boolean activeUserExists = this.activeUserExists();
 
-			if (activeUserExists) {
-				final Optional<ActiveUserEntity> activeUserEntity =
-						this.getCurrentUser(request);
-
-				if (!activeUserEntity.isPresent()) {
-					modelAndView = new ModelAndView(ViewNames.SIGN_IN.getViewName());
-				} else {
-
+			if (!activeUserExists) {
 					modelAndView = new ModelAndView(
 							REDIRECT_PREPEND.concat(
 									ViewNames.EMPLOYEE_DETAIL.getRoute()));
 				}
-			}
+
 			return modelAndView;
 		}
 
@@ -78,8 +71,6 @@ public class SignInRouteController extends BaseRouteController {
 		}
 	}
 	// Properties
-	@Autowired
-	private EmployeeQuery employeeQuery;
 
 	@Autowired
 	private ActiveEmployeeExistsQuery activeEmployeeExistsQuery;
