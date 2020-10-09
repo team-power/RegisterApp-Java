@@ -27,9 +27,9 @@
                 <ul class="menuButtons">
                     <li><button id="startTransactionButton" type="button" class="action">Start Transaction</button></li>
                     <li><button id="productListingButton" type="button" class="action">View Products</button></li>
-                    <li th:class="${!isElevatedUser} ? hidden : ''"><button id="employeeDetailsButton" type="button" class="action">Create Employee</button></li>
-                    <li th:class="${!isElevatedUser} ? hidden : ''"><button id="salesReportButton" type="button" class="action">Sales Report</button></li>
-                    <li th:class="${!isElevatedUser} ? hidden : ''"><button id="cashierReportButton" type="button" class="action">Cashier Report</button></li>
+                    <li th:class="${!isElevatedUser ? hidden : ''}"><button id="employeeDetailsButton" type="button" class="action">Create Employee</button></li>
+                    <li th:class="${!isElevatedUser ? hidden : ''}"><button id="salesReportButton" type="button" class="action">Sales Report</button></li>
+                    <li th:class="${!isElevatedUser ? hidden : ''}"><button id="cashierReportButton" type="button" class="action">Cashier Report</button></li>
 				</ul>
             </div>
         </div>
