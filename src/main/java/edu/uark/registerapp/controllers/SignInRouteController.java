@@ -16,7 +16,7 @@ public class SignInRouteController extends BaseRouteController {
 	// TODO: Route for initial page load
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView start() {
-			return (new ModelAndView("signIn"));
+			return (new ModelAndView("mainMenu"));
 
 	}
 
