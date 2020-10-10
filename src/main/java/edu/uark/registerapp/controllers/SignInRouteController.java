@@ -2,6 +2,7 @@ package edu.uark.registerapp.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import edu.uark.registerapp.commands.activeUsers.ValidateActiveUserCommand;
 import edu.uark.registerapp.commands.employees.EmployeeQuery;
 import edu.uark.registerapp.commands.employees.EmployeeSignInCommand;
 import edu.uark.registerapp.commands.exceptions.NotFoundException;
@@ -56,16 +57,23 @@ public class SignInRouteController extends BaseRouteController {
 		@RequestBody final EmployeeSignIn employeeSignIn,
 		final HttpServletRequest request
 	) {
-		String employeeId = request.getParameter("employeeId");
+		/*String employeeId = request.getParameter("employeeId");
 		String password = request.getParameter("password");
 		employeeSignIn.setEmployeeId(employeeId);
 		employeeSignIn .setPassword(password);
+		String sessionId = request.getSession().getId();
+		this.validateActiveUserCommand.execute();*/
+		String sessionId = request.getSession().getId();
+		this.employeeSignInCommand.setSessionId(sessionId);
+
 
 		final boolean validCredentials = this.validCredentials();
 
-		if (validCredentials) {
+		if (!validCredentials) {
 			return new ModelAndView(ViewNames.SIGN_IN.getViewName());
 		}
+
+		createActiveUser();
 
 		// TODO: Use the credentials provided in the request body
 		//  and the "id" property of the (HttpServletRequest)request.getSession() variable
@@ -97,6 +105,12 @@ public class SignInRouteController extends BaseRouteController {
 		}
 	}
 
+	private void createActiveUser(){
+		try{
+			this.validateActiveUserCommand.execute();
+		} catch (final NotFoundException e) {
+		}
+	}
 
 	// Properties
 
@@ -105,6 +119,9 @@ public class SignInRouteController extends BaseRouteController {
 
 	@Autowired
 	private ActiveEmployeeExistsQuery activeEmployeeExistsQuery;
+
+	@Autowired
+	private ValidateActiveUserCommand validateActiveUserCommand;
 
 }
 
