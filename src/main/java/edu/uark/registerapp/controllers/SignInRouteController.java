@@ -6,6 +6,7 @@ import edu.uark.registerapp.commands.activeUsers.ValidateActiveUserCommand;
 import edu.uark.registerapp.commands.employees.EmployeeQuery;
 import edu.uark.registerapp.commands.employees.EmployeeSignInCommand;
 import edu.uark.registerapp.commands.exceptions.NotFoundException;
+import edu.uark.registerapp.commands.exceptions.UnauthorizedException;
 import edu.uark.registerapp.controllers.enums.ViewModelNames;
 import edu.uark.registerapp.models.api.Employee;
 import edu.uark.registerapp.models.api.EmployeeSignIn;
@@ -70,7 +71,9 @@ public class SignInRouteController extends BaseRouteController {
 		final boolean validCredentials = this.validCredentials();
 
 		if (!validCredentials) {
-			return new ModelAndView(ViewNames.SIGN_IN.getViewName());
+			return new ModelAndView(
+					REDIRECT_PREPEND.concat(
+							ViewNames.SIGN_IN.getRoute()));
 		}
 
 		createActiveUser();
@@ -106,10 +109,11 @@ public class SignInRouteController extends BaseRouteController {
 	}
 
 	private void createActiveUser(){
-		try{
+		//try{
 			this.validateActiveUserCommand.execute();
-		} catch (final NotFoundException e) {
-		}
+		//} catch (final NotFoundException e) {
+		//	throw new UnauthorizedException();
+		//}
 	}
 
 	// Properties
