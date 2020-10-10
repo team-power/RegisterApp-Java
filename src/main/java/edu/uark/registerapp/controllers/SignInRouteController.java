@@ -63,8 +63,6 @@ public class SignInRouteController extends BaseRouteController {
 		String sessionId = request.getSession().getId();
 		this.employeeSignInCommand.setSessionId(sessionId);
 
-
-
 		final boolean validCredentials = this.validCredentials();
 
 		if (!validCredentials) {
