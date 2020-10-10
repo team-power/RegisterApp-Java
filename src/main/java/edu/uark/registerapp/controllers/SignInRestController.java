@@ -1,7 +1,11 @@
 package edu.uark.registerapp.controllers;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import edu.uark.registerapp.commands.activeUsers.ActiveUserDeleteCommand;
+import edu.uark.registerapp.models.repositories.ActiveUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,10 +21,15 @@ public class SignInRestController extends BaseRestController {
 	public @ResponseBody ApiResponse removeActiveUser(
 		final HttpServletRequest request
 	) {
+		String sessionId = request.getSession().getId();
+		this.activeUserDeleteCommand.execute();
 
 		// TODO: Sign out the user associated with request.getSession().getId()
 
 		return (new ApiResponse())
 			.setRedirectUrl(ViewNames.SIGN_IN.getRoute());
 	}
+
+	@Autowired
+	private ActiveUserDeleteCommand activeUserDeleteCommand;
 }

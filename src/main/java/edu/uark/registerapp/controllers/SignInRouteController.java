@@ -75,7 +75,7 @@ public class SignInRouteController extends BaseRouteController {
 
 		return new ModelAndView(
 			REDIRECT_PREPEND.concat(
-				ViewNames.PRODUCT_DETAIL.getRoute()));
+				ViewNames.MAIN_MENU.getRoute()));
 	}
 
 
