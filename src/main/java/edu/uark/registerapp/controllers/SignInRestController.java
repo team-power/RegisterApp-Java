@@ -22,6 +22,7 @@ public class SignInRestController extends BaseRestController {
 		final HttpServletRequest request
 	) {
 		String sessionId = request.getSession().getId();
+		this.activeUserDeleteCommand.setSessionKey(sessionId);
 		this.activeUserDeleteCommand.execute();
 
 		// TODO: Sign out the user associated with request.getSession().getId()

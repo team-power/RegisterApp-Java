@@ -12,6 +12,8 @@ import edu.uark.registerapp.models.api.Employee;
 import edu.uark.registerapp.models.api.EmployeeSignIn;
 import edu.uark.registerapp.models.api.Product;
 import edu.uark.registerapp.models.entities.ActiveUserEntity;
+import edu.uark.registerapp.models.entities.EmployeeEntity;
+import edu.uark.registerapp.models.repositories.ActiveUserRepository;
 import edu.uark.registerapp.models.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -58,14 +60,9 @@ public class SignInRouteController extends BaseRouteController {
 		@RequestBody final EmployeeSignIn employeeSignIn,
 		final HttpServletRequest request
 	) {
-		/*String employeeId = request.getParameter("employeeId");
-		String password = request.getParameter("password");
-		employeeSignIn.setEmployeeId(employeeId);
-		employeeSignIn .setPassword(password);
-		String sessionId = request.getSession().getId();
-		this.validateActiveUserCommand.execute();*/
 		String sessionId = request.getSession().getId();
 		this.employeeSignInCommand.setSessionId(sessionId);
+
 
 
 		final boolean validCredentials = this.validCredentials();
@@ -76,7 +73,7 @@ public class SignInRouteController extends BaseRouteController {
 							ViewNames.SIGN_IN.getRoute()));
 		}
 
-		createActiveUser();
+
 
 		// TODO: Use the credentials provided in the request body
 		//  and the "id" property of the (HttpServletRequest)request.getSession() variable
@@ -108,13 +105,6 @@ public class SignInRouteController extends BaseRouteController {
 		}
 	}
 
-	private void createActiveUser(){
-		//try{
-			this.validateActiveUserCommand.execute();
-		//} catch (final NotFoundException e) {
-		//	throw new UnauthorizedException();
-		//}
-	}
 
 	// Properties
 
@@ -124,16 +114,5 @@ public class SignInRouteController extends BaseRouteController {
 	@Autowired
 	private ActiveEmployeeExistsQuery activeEmployeeExistsQuery;
 
-	@Autowired
-	private ValidateActiveUserCommand validateActiveUserCommand;
 
 }
-
-/*@Controller
-@RequestMapping(value = "/")
-public class SignInRouteController {
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView start() {
-		return (new ModelAndView("productListing"));
-	}
-}*/
