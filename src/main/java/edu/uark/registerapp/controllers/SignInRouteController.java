@@ -3,8 +3,10 @@ package edu.uark.registerapp.controllers;
 import javax.servlet.http.HttpServletRequest;
 
 import edu.uark.registerapp.commands.employees.EmployeeQuery;
+import edu.uark.registerapp.commands.employees.EmployeeSignInCommand;
 import edu.uark.registerapp.commands.exceptions.NotFoundException;
 import edu.uark.registerapp.controllers.enums.ViewModelNames;
+import edu.uark.registerapp.models.api.Employee;
 import edu.uark.registerapp.models.api.EmployeeSignIn;
 import edu.uark.registerapp.models.api.Product;
 import edu.uark.registerapp.models.entities.ActiveUserEntity;
@@ -49,14 +51,16 @@ public class SignInRouteController extends BaseRouteController {
 
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public ModelAndView performSignIn( @RequestBody EmployeeSignIn employeeSignIn,
+	public ModelAndView performSignIn(
 		// TODO: Define an object that will represent the sign in request and add it as a parameter here
-
-		HttpServletRequest request
+		@RequestBody final EmployeeSignIn employeeSignIn,
+		final HttpServletRequest request
 	) {
-		String employeeId = employeeSignIn.getEmployeeId();
-		String password = employeeSignIn.getPassword();
-		//if()
+		String employeeId = request.getParameter("employeeId");
+		String password = request.getParameter("password");
+		employeeSignIn.setEmployeeId(employeeId);
+		employeeSignIn .setPassword(password);
+
 		final boolean validCredentials = this.validCredentials();
 
 		if (validCredentials) {
@@ -77,7 +81,7 @@ public class SignInRouteController extends BaseRouteController {
 
 	private boolean validCredentials(){
 		try{
-			this.employeeQuery.execute();
+			this.employeeSignInCommand.execute();
 			return true;
 		} catch (final NotFoundException e) {
 			return false;
@@ -97,7 +101,7 @@ public class SignInRouteController extends BaseRouteController {
 	// Properties
 
 	@Autowired
-	private EmployeeQuery employeeQuery;
+	private EmployeeSignInCommand employeeSignInCommand;
 
 	@Autowired
 	private ActiveEmployeeExistsQuery activeEmployeeExistsQuery;
