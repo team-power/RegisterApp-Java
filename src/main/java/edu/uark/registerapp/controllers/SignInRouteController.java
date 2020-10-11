@@ -82,7 +82,7 @@ public class SignInRouteController extends BaseRouteController {
 		else{
 
 			modelAndView = new ModelAndView(ViewNames.SIGN_IN.getViewName());
-			request.setAttribute("errorMessage","INVALID EmployeeId or password");
+			request.setAttribute("errorMessage","INVALID EmployeeId or INVALID password");
 		}
 
 		return modelAndView;
