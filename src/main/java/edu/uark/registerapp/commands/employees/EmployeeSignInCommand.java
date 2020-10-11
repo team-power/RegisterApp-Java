@@ -48,8 +48,6 @@ public class EmployeeSignInCommand implements ResultCommandInterface<Employee> {
 		} catch (Exception e)
 		{
 			e.printStackTrace();
-
-			System.Out.println(e);
 		}
 		
 	}
