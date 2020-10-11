@@ -68,6 +68,7 @@ public class SignInRouteController extends BaseRouteController {
 		this.employeeSignInCommand.setEmployeeSignIn(employeeSignIn);
 		this.employeeSignInCommand.setSessionId(sessionId);
 
+/*
 		final boolean validCredentials = this.validCredentials();
 
 		if (!validCredentials) {
@@ -75,7 +76,7 @@ public class SignInRouteController extends BaseRouteController {
 					REDIRECT_PREPEND.concat(
 							ViewNames.SIGN_IN.getRoute()));
 		}
-
+*/
 
 
 		// TODO: Use the credentials provided in the request body
