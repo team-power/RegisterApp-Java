@@ -3,6 +3,7 @@ package edu.uark.registerapp.controllers;
 import static java.lang.System.out;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import edu.uark.registerapp.commands.activeUsers.ValidateActiveUserCommand;
 import edu.uark.registerapp.commands.employees.EmployeeQuery;
@@ -29,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.uark.registerapp.controllers.enums.ViewNames;
 import edu.uark.registerapp.commands.employees.ActiveEmployeeExistsQuery;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
 
@@ -60,8 +62,9 @@ public class SignInRouteController extends BaseRouteController {
 	public ModelAndView performSignIn(
 		// TODO: Define an object that will represent the sign in request and add it as a parameter here
 		final EmployeeSignIn employeeSignIn,
-		final HttpServletRequest request
-	) {
+		final HttpServletRequest request,
+		final HttpServletResponse response
+	) throws IOException {
 		String employeeId = request.getParameter("employeeId");
 		String password = request.getParameter("password");
 		System.out.println(employeeId);
@@ -72,15 +75,23 @@ public class SignInRouteController extends BaseRouteController {
 		this.employeeSignInCommand.setEmployeeSignIn(employeeSignIn);
 		this.employeeSignInCommand.setSessionId(sessionId);
 
-/*
+
+		response.setContentType("text2/html;");
+		response.getWriter().println("<h1>After Valid CredentialPassword = " + password + "!</h1>");
+		response.getWriter().println("<h1>EmployeeId = " + employeeId + "!</h1>");
+
 		final boolean validCredentials = this.validCredentials();
 
 		if (!validCredentials) {
+
+			response.setContentType("text/html;");
+			response.getWriter().println("<h1>After Valid CredentialPassword = " + password + "!</h1>");
+			response.getWriter().println("<h1>EmployeeId = " + employeeId + "!</h1>");
 			return new ModelAndView(
 					REDIRECT_PREPEND.concat(
 							ViewNames.SIGN_IN.getRoute()));
 		}
-*/
+
 
 
 		// TODO: Use the credentials provided in the request body
