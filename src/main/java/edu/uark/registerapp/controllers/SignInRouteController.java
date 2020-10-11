@@ -80,6 +80,7 @@ public class SignInRouteController extends BaseRouteController {
 		response.getWriter().println("<h1>After Valid CredentialPassword = " + password + "!</h1>");
 		response.getWriter().println("<h1>EmployeeId = " + employeeId + "!</h1>");
 
+/*
 		final boolean validCredentials = this.validCredentials();
 
 		if (!validCredentials) {
@@ -91,7 +92,7 @@ public class SignInRouteController extends BaseRouteController {
 					REDIRECT_PREPEND.concat(
 							ViewNames.SIGN_IN.getRoute()));
 		}
-
+*/
 
 
 		// TODO: Use the credentials provided in the request body
