@@ -62,31 +62,15 @@ public class SignInRouteController extends BaseRouteController {
 	public ModelAndView performSignIn(
 		// TODO: Define an object that will represent the sign in request and add it as a parameter here
 		final EmployeeSignIn employeeSignIn,
-		final HttpServletRequest request,
-		final HttpServletResponse response
+		final HttpServletRequest request
 	) throws IOException {
-		String employeeId = request.getParameter("employeeID");
-		String password = request.getParameter("password");
-		System.out.println(employeeId);
-		System.out.println(password);
 		String sessionId = request.getSession().getId();
-		employeeSignIn.setEmployeeId(employeeId);
-		employeeSignIn.setPassword(password);
 		this.employeeSignInCommand.setEmployeeSignIn(employeeSignIn);
 		this.employeeSignInCommand.setSessionId(sessionId);
-
-
-		response.setContentType("text2/html;");
-		response.getWriter().println("<h1>After Valid CredentialPassword = " + password + "!</h1>");
-		response.getWriter().println("<h1>EmployeeId = " + employeeId + "!</h1>");
 
 		final boolean validCredentials = this.validCredentials();
 
 		if (!validCredentials) {
-
-			response.setContentType("text/html;");
-			response.getWriter().println("<h1>After Valid CredentialPassword = " + password + "!</h1>");
-			response.getWriter().println("<h1>EmployeeId = " + employeeId + "!</h1>");
 			return new ModelAndView(
 					REDIRECT_PREPEND.concat(
 							ViewNames.SIGN_IN.getRoute()));
