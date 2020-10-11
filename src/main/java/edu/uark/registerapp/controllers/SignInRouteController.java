@@ -93,7 +93,7 @@ public class SignInRouteController extends BaseRouteController {
 		try{
 			this.employeeSignInCommand.execute();
 			return true;
-		} catch (Exception e) {
+		} catch (UnauthorizedException e) {
 			e.printStackTrace();
 			return false;
 		}
