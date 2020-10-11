@@ -72,33 +72,25 @@ public class SignInRouteController extends BaseRouteController {
 		this.employeeSignInCommand.setSessionId(sessionId);
 
 
-		response.setContentType("text2/html;");
-		response.getWriter().println("<h1>After Valid CredentialPassword = " + password + "!</h1>");
-		response.getWriter().println("<h1>EmployeeId = " + employeeId + "!</h1>");
-
 		final boolean validCredentials = this.validCredentials();
 
-		if (!validCredentials) {
-
-			response.setContentType("text/html;");
-			response.getWriter().println("<h1>After Valid CredentialPassword = " + password + "!</h1>");
-			response.getWriter().println("<h1>EmployeeId = " + employeeId + "!</h1>");
-			return new ModelAndView(
-					REDIRECT_PREPEND.concat(
-							ViewNames.SIGN_IN.getRoute()));
-		}
-
-
+		ModelAndView modelAndView = new ModelAndView(ViewNames.SIGN_IN.getViewName());
 
 		// TODO: Use the credentials provided in the request body
 		//  and the "id" property of the (HttpServletRequest)request.getSession() variable
 		//  to sign in the user
 
+		if (!validCredentials) {
+			modelAndView.addObject(
+					ViewModelNames.ERROR_MESSAGE.getValue());
+		}
+		else {
+			modelAndView = new ModelAndView(
+					REDIRECT_PREPEND.concat(
+							ViewNames.MAIN_MENU.getRoute()));
+		}
 
-
-		return new ModelAndView(
-			REDIRECT_PREPEND.concat(
-				ViewNames.MAIN_MENU.getRoute()));
+		return modelAndView;
 	}
 
 
