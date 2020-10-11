@@ -57,8 +57,8 @@ public class SignInRouteController extends BaseRouteController {
 	@RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public ModelAndView performSignIn(
 		// TODO: Define an object that will represent the sign in request and add it as a parameter here
-		@RequestBody final EmployeeSignIn employeeSignIn,
-		HttpServletRequest request
+		final EmployeeSignIn employeeSignIn,
+		final HttpServletRequest request
 	) {
 		String sessionId = request.getSession().getId();
 		this.employeeSignInCommand.setSessionId(sessionId);
