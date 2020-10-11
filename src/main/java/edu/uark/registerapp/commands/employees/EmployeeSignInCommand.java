@@ -5,13 +5,14 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import edu.uark.registerapp.commands.exceptions.NotFoundException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.uark.registerapp.commands.ResultCommandInterface;
 import edu.uark.registerapp.commands.employees.helpers.EmployeeHelper;
-import edu.uark.registerapp.commands.exceptions.UnauthorizedException;
+import edu.uark.registerapp.commands.exceptions.NotFoundException;
 import edu.uark.registerapp.commands.exceptions.UnprocessableEntityException;
 import edu.uark.registerapp.models.api.Employee;
 import edu.uark.registerapp.models.api.EmployeeSignIn;
@@ -57,7 +58,8 @@ public class EmployeeSignInCommand implements ResultCommandInterface<Employee> {
 				EmployeeHelper.hashPassword(this.employeeSignIn.getPassword()))
 		) {
 
-			throw new UnauthorizedException();
+			//throw new UnauthorizedException();
+			throw new NotFoundException("Employee ID");
 		}
 
 		final Optional<ActiveUserEntity> activeUserEntity =
