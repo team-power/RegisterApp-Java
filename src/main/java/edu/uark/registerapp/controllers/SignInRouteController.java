@@ -1,7 +1,5 @@
 package edu.uark.registerapp.controllers;
 
-import static java.lang.System.out;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -47,21 +45,12 @@ public class SignInRouteController extends BaseRouteController {
 		ModelAndView modelAndView = new ModelAndView(ViewNames.SIGN_IN.getViewName());
 
 			final boolean activeUserExists = this.activeUserExists();
-			
 
 			if (!activeUserExists) {
 					modelAndView = new ModelAndView(
 							REDIRECT_PREPEND.concat(
 									ViewNames.EMPLOYEE_DETAIL.getRoute()));
 				}
-
-
-			final Optional<ActiveUserEntity> activeUserEntity = this.getCurrentUser(request);
-			if (activeUserEntity.isPresent()) {
-				modelAndView = new ModelAndView(
-							REDIRECT_PREPEND.concat(
-									ViewNames.MAIN_MENU.getRoute()));
-			}
 
 			return modelAndView;
 		}
@@ -71,19 +60,34 @@ public class SignInRouteController extends BaseRouteController {
 	public ModelAndView performSignIn(
 		// TODO: Define an object that will represent the sign in request and add it as a parameter here
 		final EmployeeSignIn employeeSignIn,
-		final HttpServletRequest request
+		final HttpServletRequest request,
+		final HttpServletResponse response
 	) throws IOException {
+		String employeeId = request.getParameter("employeeId");
+		String password = request.getParameter("password");
 		String sessionId = request.getSession().getId();
+		employeeSignIn.setEmployeeId(employeeId);
+		employeeSignIn.setPassword(password);
 		this.employeeSignInCommand.setEmployeeSignIn(employeeSignIn);
 		this.employeeSignInCommand.setSessionId(sessionId);
+
+
+		response.setContentType("text2/html;");
+		response.getWriter().println("<h1>After Valid CredentialPassword = " + password + "!</h1>");
+		response.getWriter().println("<h1>EmployeeId = " + employeeId + "!</h1>");
 
 		final boolean validCredentials = this.validCredentials();
 
 		if (!validCredentials) {
+
+			response.setContentType("text/html;");
+			response.getWriter().println("<h1>After Valid CredentialPassword = " + password + "!</h1>");
+			response.getWriter().println("<h1>EmployeeId = " + employeeId + "!</h1>");
 			return new ModelAndView(
 					REDIRECT_PREPEND.concat(
 							ViewNames.SIGN_IN.getRoute()));
 		}
+
 
 
 		// TODO: Use the credentials provided in the request body
@@ -102,8 +106,7 @@ public class SignInRouteController extends BaseRouteController {
 		try{
 			this.employeeSignInCommand.execute();
 			return true;
-		} catch (UnauthorizedException e) {
-			e.printStackTrace();
+		} catch (final NotFoundException e) {
 			return false;
 		}
 	}
