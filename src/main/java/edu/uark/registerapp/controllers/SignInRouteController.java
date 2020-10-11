@@ -109,7 +109,7 @@ public class SignInRouteController extends BaseRouteController {
 		try{
 			this.employeeSignInCommand.execute();
 			return true;
-		} catch (final NotFoundException e) {
+		} catch (Exception e) {
 			return false;
 		}
 	}
