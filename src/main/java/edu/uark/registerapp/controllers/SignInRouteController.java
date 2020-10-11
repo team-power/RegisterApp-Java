@@ -1,5 +1,7 @@
 package edu.uark.registerapp.controllers;
 
+import static java.lang.System.out;
+
 import javax.servlet.http.HttpServletRequest;
 
 import edu.uark.registerapp.commands.activeUsers.ValidateActiveUserCommand;
@@ -62,6 +64,8 @@ public class SignInRouteController extends BaseRouteController {
 	) {
 		String employeeId = request.getParameter("employeeId");
 		String password = request.getParameter("password");
+		System.out.println(employeeId);
+		System.out.println(password);
 		String sessionId = request.getSession().getId();
 		employeeSignIn.setEmployeeId(employeeId);
 		employeeSignIn.setPassword(password);
