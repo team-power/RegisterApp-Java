@@ -31,17 +31,25 @@ public class EmployeeSignInCommand implements ResultCommandInterface<Employee> {
 
 	// Helper methods
 	private void validateProperties() {
-		if (StringUtils.isBlank(this.employeeSignIn.getEmployeeId())) {
-			throw new UnprocessableEntityException("employee ID");
-		}
 		try {
-			Integer.parseInt(this.employeeSignIn.getEmployeeId());
-		} catch (final NumberFormatException e) {
+			if (StringUtils.isBlank(this.employeeSignIn.getEmployeeId())) {
 			throw new UnprocessableEntityException("employee ID");
+			}
+			try {
+				Integer.parseInt(this.employeeSignIn.getEmployeeId());
+			} catch (final NumberFormatException e) {
+				throw new UnprocessableEntityException("employee ID");
+			}
+			if (StringUtils.isBlank(this.employeeSignIn.getPassword())) {
+				throw new UnprocessableEntityException("password");
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+
+			System.Out.println(e);
 		}
-		if (StringUtils.isBlank(this.employeeSignIn.getPassword())) {
-			throw new UnprocessableEntityException("password");
-		}
+		
 	}
 
 	@Transactional
