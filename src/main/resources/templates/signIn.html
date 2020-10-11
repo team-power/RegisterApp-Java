@@ -5,9 +5,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 
 	<link rel="stylesheet" type="text/css" href="/styles/master.css">
+	<link rel="stylesheet" type="text/css" href="/styles/signIn.css">
 
 	<script type="text/javascript" src="/scripts/master.js" defer></script>
-	<!--<script type="text/javascript" src="/scripts/signIn.js" defer></script> -->
+	<script type="text/javascript" src="/scripts/signIn.js" defer></script>
 </head>
 
 <body>
@@ -27,6 +28,7 @@
 				<input type="password" name="password" value="" placeholder="PASSWORD" /><br>
 				<div id="password_error"> Password can't be blank</div><br>
 				<input type="submit" value="SignIn" />
+				<div id="note" name="note" > *Note: For very first SignIn(for Initial employee), Employee Id is found in URL</div>
 			</form>
 			<script>
 				//Validation code for form
