@@ -54,7 +54,7 @@ public class SignInRouteController extends BaseRouteController {
 		}
 
 
-	@RequestMapping((value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	@RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public ModelAndView performSignIn(
 		// TODO: Define an object that will represent the sign in request and add it as a parameter here
 		@RequestParam("employeeSignIn") EmployeeSignIn employeeSignIn,
