@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import edu.uark.registerapp.commands.activeUsers.ActiveUserDeleteCommand;
+import edu.uark.registerapp.commands.exceptions.NotFoundException;
 import edu.uark.registerapp.models.repositories.ActiveUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +24,22 @@ public class SignInRestController extends BaseRestController {
 	) {
 		String sessionId = request.getSession().getId();
 		this.activeUserDeleteCommand.setSessionKey(sessionId);
-		this.activeUserDeleteCommand.execute();
+
+		deleteActiveUser();
 
 		// TODO: Sign out the user associated with request.getSession().getId()
 
 		return (new ApiResponse())
 			.setRedirectUrl(ViewNames.SIGN_IN.getRoute());
+	}
+
+
+	private void deleteActiveUser(){
+		try{
+			this.activeUserDeleteCommand.execute();
+		} catch (final NotFoundException e) {
+			throw new NotFoundException("Active User");
+		}
 	}
 
 	@Autowired
