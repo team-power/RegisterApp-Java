@@ -60,7 +60,12 @@ public class SignInRouteController extends BaseRouteController {
 		final EmployeeSignIn employeeSignIn,
 		final HttpServletRequest request
 	) {
+		String employeeId = request.getParameter("employeeId");
+		String password = request.getParameter("password");
 		String sessionId = request.getSession().getId();
+		employeeSignIn.setEmployeeId(employeeId);
+		employeeSignIn.setPassword(password);
+		this.employeeSignInCommand.setEmployeeSignIn(employeeSignIn);
 		this.employeeSignInCommand.setSessionId(sessionId);
 
 		final boolean validCredentials = this.validCredentials();
