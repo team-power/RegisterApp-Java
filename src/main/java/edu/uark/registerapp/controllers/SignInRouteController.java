@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.uark.registerapp.controllers.enums.ViewNames;
 import edu.uark.registerapp.commands.employees.ActiveEmployeeExistsQuery;
+import edu.uark.registerapp.models.entities.ActiveUserEntity;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.ServletException;
