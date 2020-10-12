@@ -40,14 +40,9 @@ public class ProductListingRouteController extends BaseRouteController {
 				(new Product[0]));
 		}
 
-		/*
 		modelAndView.addObject(
 			ViewModelNames.IS_ELEVATED_USER.getValue(),
 			this.isElevatedUser(activeUserEntity.get()));
-		*/	
-		modelAndView.addObject(
-			ViewModelNames.IS_ELEVATED_USER.getValue(),
-			false);
 
 		return modelAndView;
 	}

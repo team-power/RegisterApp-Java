@@ -33,12 +33,7 @@ public class ProductDetailRouteController extends BaseRouteController {
 				(new Product()).setLookupCode(StringUtils.EMPTY).setCount(0))
 			.addObject(
 				ViewModelNames.IS_ELEVATED_USER.getValue(),
-				false);
-			/*
-			.addObject(
-				ViewModelNames.IS_ELEVATED_USER.getValue(),
 				this.isElevatedUser(activeUserEntity.get()));
-			*/	
 	}
 
 	@RequestMapping(value = "/{productId}", method = RequestMethod.GET)
@@ -66,13 +61,7 @@ public class ProductDetailRouteController extends BaseRouteController {
 
 		modelAndView.addObject(
 			ViewModelNames.IS_ELEVATED_USER.getValue(),
-			false);
-
-		/*
-		modelAndView.addObject(
-			ViewModelNames.IS_ELEVATED_USER.getValue(),
 			this.isElevatedUser(activeUserEntity.get()));
-		*/
 
 		return modelAndView;
 	}
