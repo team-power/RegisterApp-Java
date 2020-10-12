@@ -48,7 +48,7 @@ public class SignInRouteController extends BaseRouteController {
 									ViewNames.EMPLOYEE_DETAIL.getRoute()));
 				}
 
-			if (!activeUserEntity.isPresent()) {
+			if (activeUserEntity.isPresent()) {
 				modelAndView = new ModelAndView(
 					REDIRECT_PREPEND.concat(
 							ViewNames.MAIN_MENU.getRoute()));
