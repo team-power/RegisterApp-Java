@@ -39,12 +39,19 @@ public class SignInRouteController extends BaseRouteController {
 		ModelAndView modelAndView = new ModelAndView(ViewNames.SIGN_IN.getViewName());
 
 			final boolean activeUserExists = this.activeUserExists();
+			final Optional<ActiveUserEntity> activeUserEntity = this.getCurrentUser(request);
 
 			if (!activeUserExists) {
 					modelAndView = new ModelAndView(
 							REDIRECT_PREPEND.concat(
 									ViewNames.EMPLOYEE_DETAIL.getRoute()));
 				}
+
+			if (!activeUserEntity.isPresent()) {
+				modelAndView = new ModelAndView(
+					REDIRECT_PREPEND.concat(
+							ViewNames.MAIN_MENU.getRoute()));
+			}
 
 			return modelAndView;
 		}
