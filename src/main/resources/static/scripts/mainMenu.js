@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function startTransactionClick(event) {
-    displayError("Functionality has not yet been implemented.");
+    window.location.assign("/transaction/");
 }
 
 function productListingClick(event) {
