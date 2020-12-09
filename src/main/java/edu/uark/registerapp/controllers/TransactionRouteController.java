@@ -19,10 +19,15 @@ public class TransactionRouteController extends BaseRouteController {
     public ModelAndView showTransaction(final HttpServletRequest request) {
         final Optional<ActiveUserEntity> activeUserEntity =
             this.getCurrentUser(request);
+        if (!activeUserEntity.isPresent()) {
+            return this.buildInvalidSessionResponse();
+        } else if (!this.isElevatedUser(activeUserEntity.get())) {
+            return this.buildNoPermissionsResponse();
+        }   
 
         ModelAndView modelAndView = 
             new ModelAndView(ViewNames.TRANSACTION.getViewName());
 
-            return modelAndView;
+        return modelAndView;
     }
 }
