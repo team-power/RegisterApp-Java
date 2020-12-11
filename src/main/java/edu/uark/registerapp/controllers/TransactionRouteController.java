@@ -1,14 +1,19 @@
 package edu.uark.registerapp.controllers;
 
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.uark.registerapp.models.api.Product;
 import edu.uark.registerapp.controllers.enums.ViewNames;
 import edu.uark.registerapp.models.entities.ActiveUserEntity;
 import edu.uark.registerapp.models.entities.ProductEntity;
@@ -32,9 +37,9 @@ public class TransactionRouteController extends BaseRouteController {
 
             final LinkedList<Product> productsInTransaction = new LinkedList<Product>();
 
-        for (Map.Entry<String, String> product : products) {
+        for (Map.Entry<String, String> product : products.entrySet()) {
             Optional<ProductEntity> productEntity = productRepository.findByLookupCode(product.getKey());
-            if (productEntity.isPresent() && productEntity.getCount() > 0) {
+            if (productEntity.isPresent() && productEntity.get().getCount() > 0) {
                 productsInTransaction.addLast(new Product(productEntity));
             }
         }
