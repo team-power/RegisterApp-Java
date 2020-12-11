@@ -3,5 +3,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function cancelTransaction(event) {
-    window.location.assign("/MainMenu/");
+    window.location.assign("/mainMenu/");
 }

@@ -11,12 +11,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.uark.registerapp.controllers.enums.ViewNames;
 import edu.uark.registerapp.models.entities.ActiveUserEntity;
+import edu.uark.registerapp.models.entities.ProductEntity;
+import edu.uark.registerapp.models.repositories.ProductRepository;
 
 @Controller
 @RequestMapping(value = "/transaction")
 public class TransactionRouteController extends BaseRouteController {
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView showTransaction(final HttpServletRequest request) {
+    public ModelAndView showTransaction(final HttpServletRequest request, @RequestParam Map<String, String> products) {
         final Optional<ActiveUserEntity> activeUserEntity =
             this.getCurrentUser(request);
         if (!activeUserEntity.isPresent()) {
@@ -28,6 +30,24 @@ public class TransactionRouteController extends BaseRouteController {
         ModelAndView modelAndView = 
             new ModelAndView(ViewNames.TRANSACTION.getViewName());
 
+            final LinkedList<Product> productsInTransaction = new LinkedList<Product>();
+
+        for (Map.Entry<String, String> product : products) {
+            Optional<ProductEntity> productEntity = productRepository.findByLookupCode(product.getKey());
+            if (productEntity.isPresent() && productEntity.getCount() > 0) {
+                productsInTransaction.addLast(new Product(productEntity));
+            }
+        }
+
+        modelAndView.addObject(
+				ViewModelNames.PRODUCTS.getValue(),
+				productsInTransaction);
+
         return modelAndView;
     }
+
+    // Properties
+	@Autowired
+	private ProductRepository productRepository;
 }
+
