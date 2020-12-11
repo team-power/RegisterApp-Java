@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("cancelButton").addEventListener("click", cancelTransaction);
-    for (var elem in document.getElementsByClassName("removeButton")) {
-        elem.addEventListener("click", removeProduct)
+    var listElements = document.getElementsByClassName("removeButton");
+    for (let i = 0; i < listElements.length; i++) {
+        listElements[i].addEventListener("click", removeProduct);
     }
 });
 
@@ -14,7 +15,7 @@ function removeProduct(event) {
     var parent = target.parentElement;
     var productLookupCode = parent.querySelector(".productLookupCodeDisplay")
     
-    window.location.assign(removeProductFromUrl(productLookupCode.value ,window.location.href))
+    window.location.assign(removeProductFromUrl(productLookupCode.innerText ,window.location.href))
 }
 
 
