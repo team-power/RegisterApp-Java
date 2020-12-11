@@ -42,7 +42,7 @@ public class TransactionRouteController extends BaseRouteController {
             Optional<ProductEntity> productEntity = productRepository.findByLookupCode(product.getKey());
             if (productEntity.isPresent() && productEntity.get().getCount() > 0) {
                 try {
-                    productsInTransaction.addLast(new Product(productEntity.get()).setCount(Integer.parseInt(product.getValue())));
+                    productsInTransaction.addLast(new Product(productEntity.get()).setCount(Math.max(Integer.parseInt(product.getValue()), productEntity.get().getCount())));
                 } catch (final Exception e) {
                     continue;
                 }
